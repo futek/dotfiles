@@ -1,0 +1,175 @@
+set nocompatible
+
+" vundle begin
+filetype off
+set runtimepath+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+
+" vundle plugins
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'bling/vim-airline'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tomasr/molokai'
+Plugin 'ShowTrailingWhitespace'
+
+" vundle end
+call vundle#end()
+filetype plugin indent on
+
+" general
+set encoding=utf-8
+set shell=/bin/bash
+set history=1000
+set autoread
+set timeoutlen=500
+set visualbell
+set wildmenu
+set cursorline
+let mapleader = "ø"
+nnoremap <space> :
+vnoremap <space> :
+
+" break stupid habit
+nnoremap : <nop>
+
+" colors
+syntax enable
+if has("gui_running")
+	colorscheme solarized
+	set background=dark
+	highlight LineNr ctermbg=8 ctermfg=10 guibg=#022b35 guifg=#2c464c
+	highlight CursorLineNr guibg=#073642 guifg=#2c464c
+	highlight SpecialKey ctermbg=8 guibg=#022b35
+else
+	colorscheme molokai
+	let g:rehas256 = 1
+end
+
+" airline
+set laststatus=2
+set ttimeoutlen=50
+let g:airline_powerline_fonts = 1
+if !has("gui_running")
+	let g:airline_left_sep = ''
+	let g:airline_right_sep = ''
+end
+
+" diff settings
+set diffopt=filler,vertical
+
+" vimrc edit and reload
+nnoremap <leader>ev :split ~/.vimrc<enter>
+nnoremap <leader>egv :split ~/.gvimrc<enter>
+autocmd! BufWritePost ~/.vimrc source %
+autocmd! BufWritePost ~/.gvimrc source %
+
+" mouse
+set mouse=a
+if !has("gui_running")
+	noremap <scrollwheelup> <c-y>
+	noremap <scrollwheeldown> <c-e>
+	inoremap <scrollwheelup> <c-x><c-y>
+	inoremap <scrollwheeldown> <c-x><c-e>
+end
+
+" backup
+set nobackup
+set noswapfile
+
+" backspace behavior
+set backspace=indent,eol,start
+
+" line numbers
+set nonumber
+set relativenumber
+set numberwidth=3
+
+" folding
+"TODO: research folding..
+
+" listchars
+set list
+set listchars=tab:\ \ ,precedes:‹,extends:›,trail:·
+
+" indentation
+set tabstop=4
+set shiftwidth=4
+inoremap <c-tab> <tab>
+nnoremap <leader><tab> :let @" = "<tab>"<enter>
+nnoremap <tab> a<c-t><esc>
+nnoremap <s-tab> a<c-d><esc>
+inoremap <tab> <c-t>
+inoremap <s-tab> <c-d>
+xnoremap <tab> :call VisualModeIndent(1)<enter>
+xnoremap <s-tab> :call VisualModeIndent(0)<enter>
+function! VisualModeIndent(right)
+	let l:lnum = getpos('.')[1]
+	let [l:bufnum1, l:lnum1, l:col1, l:off1] = getpos("'<")
+	let [l:bufnum2, l:lnum2, l:col2, l:off2] = getpos("'>")
+	if l:lnum == l:lnum1 || l:lnum == l:lnum2
+		let l:lead1 = matchend(getline('.'), "^\\s*")
+	end
+	if a:right > 0
+		>
+	else
+		<
+	end
+	if l:lnum == l:lnum1 || l:lnum == l:lnum2
+		let l:lead2 = matchend(getline('.'), "^\\s*")
+		let l:offset = l:lead2 - l:lead1
+		if l:lnum == l:lnum1
+			call setpos("'<", [l:bufnum1, l:lnum1, l:col1 + l:offset, l:off1])
+		else
+			call setpos("'>", [l:bufnum2, l:lnum2, l:col2 + l:offset, l:off2])
+			normal gv
+		end
+	end
+endfunction
+
+" completion
+set complete=.,w,b,u,t,i
+
+" word wrapping
+set nowrap
+set sidescroll=1
+set sidescrolloff=1
+
+" search
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+nnoremap - /
+nnoremap -- //
+nnoremap _ ?
+nnoremap __ ??
+nnoremap <leader><space> :nohlsearch<enter>
+nohlsearch
+
+" trailing whitespace color
+highlight ShowTrailingWhitespace ctermbg=red guibg=#9f0a0a
+
+" window management
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
+nnoremap <silent> <c-space> :call MaximizeToggle()<enter>
+nnoremap <silent> <nul> :call MaximizeToggle()<enter>
+function! MaximizeToggle()
+	if exists("s:maximize_session")
+		exec "source " . s:maximize_session
+		call delete(s:maximize_session)
+		unlet s:maximize_session
+		let &hidden = s:maximize_hidden_save
+		unlet s:maximize_hidden_save
+	else
+		let s:maximize_hidden_save = &hidden
+		let s:maximize_session = tempname()
+		set hidden
+		exec "mksession! " . s:maximize_session
+		only
+	endif
+endfunction

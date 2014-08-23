@@ -39,9 +39,9 @@ syntax enable
 if has("gui_running")
 	colorscheme solarized
 	set background=dark
-	highlight LineNr ctermbg=8 ctermfg=10 guibg=#022b35 guifg=#2c464c
+	highlight LineNr guibg=#022b35 guifg=#2c464c
 	highlight CursorLineNr guibg=#073642 guifg=#2c464c
-	highlight SpecialKey ctermbg=8 guibg=#022b35
+	highlight SpecialKey guibg=#022b35
 else
 	colorscheme molokai
 	let g:rehas256 = 1

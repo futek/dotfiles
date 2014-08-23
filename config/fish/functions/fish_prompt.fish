@@ -9,7 +9,14 @@ function fish_prompt
 
 	set_color $fish_color_cwd
 	echo $pwd
+
+	if test (whoami) = "root"
+		set_color red
+		echo -n '☢ '
+	end
+
 	set_color magenta
 	echo -n '❯ '
+
 	set_color normal
 end

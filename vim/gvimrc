@@ -1,8 +1,0 @@
-" font
-let fontfamily = 'Inconsolata for Powerline'
-let fontsize = '14'
-let &guifont = fontfamily . ':h' . fontsize
-nnoremap <silent> <leader>0 :<c-u>let &guifont = fontfamily . ':h' . (v:count ? v:count : fontsize)<enter>
-
-" cursor
-set guicursor=n:blinkon0

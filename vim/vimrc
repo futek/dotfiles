@@ -2,32 +2,55 @@ set nocompatible
 
 " vundle begin
 filetype off
-set runtimepath+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
+set runtimepath+=~/.vim/bundle/vundle
+call vundle#rc()
+Bundle 'gmarik/vundle v'
 
 " vundle plugins
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'bling/vim-airline'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tomasr/molokai'
-Plugin 'ShowTrailingWhitespace'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-dispatch'
+Bundle 'tpope/vim-speeddating'
+Bundle 'tpope/vim-repeat'
+
+Bundle 'scrooloose/syntastic'
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/nerdcommenter'
+
+Bundle 'ervandew/supertab'
+Bundle 'davidhalter/jedi-vim dev'
+
+"Bundle 'nosami/Omnisharp'
+"Bundle 'Shougo/neocomplete.vim'
+"Bundle 'kien/ctrlp.vim'
+
+Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+Bundle 'godlygeek/tabular'
+
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'tomasr/molokai'
+
+Bundle 'ShowTrailingWhitespace'
 
 " vundle end
-call vundle#end()
 filetype plugin indent on
 
 " general
 set encoding=utf-8
+set t_Co=256
+set termencoding=utf-8
+if !has("gui_running")
+	set term=xterm-256color
+endif
 set shell=/bin/bash
 set history=1000
 set autoread
 set timeoutlen=500
+set ttimeoutlen=50
 set visualbell
 set wildmenu
-set cursorline
-let mapleader = "ø"
+let mapleader = ","
 nnoremap <space> :
 vnoremap <space> :
 
@@ -36,34 +59,88 @@ nnoremap : <nop>
 
 " colors
 syntax enable
-if has("gui_running")
-	colorscheme solarized
-	set background=dark
-	highlight LineNr guibg=#022b35 guifg=#2c464c
-	highlight CursorLineNr guibg=#073642 guifg=#2c464c
-	highlight SpecialKey guibg=#022b35
-else
+"if has("gui_running")
+"    colorscheme solarized
+"    set background=dark
+"    highlight LineNr guibg=#022b35 guifg=#2c464c
+"    highlight CursorLineNr guibg=#073642 guifg=#2c464c
+"    highlight SpecialKey guibg=#022b35
+"else
 	colorscheme molokai
 	let g:rehas256 = 1
-end
+"end
 
-" airline
+" font
+let fontfamily = 'PragmataPro'
+let fontsize = 13
+let &guifont = fontfamily . ':h' . fontsize
+nnoremap <silent> <leader>0 :<c-u>let &guifont = fontfamily . ':h' . (v:count ? v:count : fontsize)<enter>
+
+" powerline
+let g:Powerline_symbols = 'fancy'
 set laststatus=2
-set ttimeoutlen=50
-let g:airline_powerline_fonts = 1
-if !has("gui_running")
-	let g:airline_left_sep = ''
-	let g:airline_right_sep = ''
-end
+
+" nerdtree
+nnoremap <leader>f :NERDTreeToggle<enter>
+
+" supertab
+let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+
+" jedi
+autocmd FileType python setlocal completeopt-=preview
+let g:jedi#popup_on_dot = 0
+
+
+" omnisharp
+"autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+"set completeopt=longest,menuone,preview
+
+" neocomplete
+"let g:neocomplete#enable_at_startup = 1
+"let g:neocomplete#enable_smart_case = 1
+"let g:neocomplete#enable_auto_preview = 1
+"let g:neocomplete#sources#dictionary#dictionaries = {
+"    \ 'default': ''
+"    \ }
+"inoremap <expr> <c-g> neocomplete#undo_completion()
+"inoremap <expr> <c-l> neocomplete#complete_common_string()
+"inoremap <silent> <enter> <c-r>=<sid>enter_function()<enter>
+"function! s:enter_function()
+"    return pumvisible() ? neocomplete#close_popup() : "\<enter>"
+"endfunction
+"inoremap <expr> <tab> pumvisible() ? "\<c-n>" : "\<tab>"
+"inoremap <expr> <s-tab> pumvisible() ? "\<c-p>" : "\<tab>"
+"inoremap <expr> <c-h> neocomplete#smart_close_popup()."\<c-h>"
+"inoremap <expr> <bs> neocomplete#smart_close_popup()."\<c-h>"
+"inoremap <expr> <c-y> neocomplete#close_popup()
+"inoremap <expr> <c-e> neocomplete#cancel_popup()
+"let g:neocomplete#enable_auto_select = 0
+"let g:neocomplete#disable_auto_complete = 0
+"call neocomplete#custom#source('_', 'sorters', [])
+"if !exists('g:neocomplete#sources')
+"    let g:neocomplete#sources = {}
+"endif
+"if !exists('g:neocomplete#sources#omni#input_patterns')
+"    let g:neocomplete#sources#omni#input_patterns = {}
+"endif
+"let g:neocomplete#sources#omni#input_patterns.cs = '.*[^=\);]'
+"let g:neocomplete#sources.cs = ['omni']
+"let g:neocomplete#enable_refresh_always = 0
+"let g:echodoc_enable_at_startup = 1
+"let g:neocomplete#enable_insert_char_pre = 1
 
 " diff settings
 set diffopt=filler,vertical
+"
+" buffers
+set hidden
+nnoremap <leader>a :buffer #<enter>
 
 " vimrc edit and reload
-nnoremap <leader>ev :split ~/.vimrc<enter>
-nnoremap <leader>egv :split ~/.gvimrc<enter>
-autocmd! BufWritePost ~/.vimrc source %
-autocmd! BufWritePost ~/.gvimrc source %
+nnoremap <leader>ev :tabedit ~/.vimrc<enter>
+nnoremap <leader>egv :tabedit ~/.gvimrc<enter>
+autocmd! bufwritepost ~/.vimrc nested source %
+autocmd! bufwritepost ~/.gvimrc nested source %
 
 " mouse
 set mouse=a
@@ -74,6 +151,10 @@ if !has("gui_running")
 	inoremap <scrollwheeldown> <c-x><c-e>
 end
 
+" cursor
+set cursorline
+set guicursor=n:blinkon0
+
 " backup
 set nobackup
 set noswapfile
@@ -82,12 +163,13 @@ set noswapfile
 set backspace=indent,eol,start
 
 " line numbers
-set nonumber
+set number
 set relativenumber
 set numberwidth=3
 
 " folding
-"TODO: research folding..
+set foldmethod=syntax
+autocmd Syntax * normal zR
 
 " listchars
 set list
@@ -96,15 +178,15 @@ set listchars=tab:\ \ ,precedes:‹,extends:›,trail:·
 " indentation
 set tabstop=4
 set shiftwidth=4
-inoremap <c-tab> <tab>
-nnoremap <leader><tab> :let @" = "<tab>"<enter>
+"inoremap <c-tab> <tab>
+"nnoremap <leader><tab> :let @" = "<tab>"<enter>
 nnoremap <tab> a<c-t><esc>
 nnoremap <s-tab> a<c-d><esc>
-inoremap <tab> <c-t>
-inoremap <s-tab> <c-d>
-xnoremap <tab> :call VisualModeIndent(1)<enter>
-xnoremap <s-tab> :call VisualModeIndent(0)<enter>
-function! VisualModeIndent(right)
+"inoremap <tab> <c-t>
+"inoremap <s-tab> <c-d>
+xnoremap <tab> :call s:visualmodeindent(1)<enter>
+xnoremap <s-tab> :call s:visualmodeindent(0)<enter>
+function! s:visualmodeindent(right)
 	let l:lnum = getpos('.')[1]
 	let [l:bufnum1, l:lnum1, l:col1, l:off1] = getpos("'<")
 	let [l:bufnum2, l:lnum2, l:col2, l:off2] = getpos("'>")
@@ -128,6 +210,10 @@ function! VisualModeIndent(right)
 	end
 endfunction
 
+" wildmenu
+set wildmenu
+set wildmode=longest:full,full
+
 " completion
 set complete=.,w,b,u,t,i
 
@@ -149,27 +235,30 @@ nnoremap <leader><space> :nohlsearch<enter>
 nohlsearch
 
 " trailing whitespace color
-highlight ShowTrailingWhitespace ctermbg=red guibg=#9f0a0a
+highlight showtrailingwhitespace ctermbg=red guibg=#9f0a0a
 
 " window management
 nnoremap <c-h> <c-w>h
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
-nnoremap <silent> <c-space> :call MaximizeToggle()<enter>
-nnoremap <silent> <nul> :call MaximizeToggle()<enter>
-function! MaximizeToggle()
-	if exists("s:maximize_session")
-		exec "source " . s:maximize_session
-		call delete(s:maximize_session)
-		unlet s:maximize_session
-		let &hidden = s:maximize_hidden_save
-		unlet s:maximize_hidden_save
-	else
-		let s:maximize_hidden_save = &hidden
-		let s:maximize_session = tempname()
-		set hidden
-		exec "mksession! " . s:maximize_session
-		only
-	endif
-endfunction
+"nnoremap <silent> <c-space> :call s:maximizetoggle()<enter>
+"nnoremap <silent> <nul> :call s:maximizetoggle()<enter>
+"function! s:maximizetoggle()
+"    if exists("s:maximize_session")
+"        exec "source " . s:maximize_session
+"        call delete(s:maximize_session)
+"        unlet s:maximize_session
+"        let &hidden = s:maximize_hidden_save
+"        unlet s:maximize_hidden_save
+"    else
+"        let s:maximize_hidden_save = &hidden
+"        let s:maximize_session = tempname()
+"        set hidden
+"        exec "mksession! " . s:maximize_session
+"        only
+"    endif
+"endfunction
+
+" format options
+autocmd BufWinEnter,BufNewFile * setlocal formatoptions=q

@@ -28,8 +28,9 @@ Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 Bundle 'godlygeek/tabular'
 
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'tomasr/molokai'
+Bundle 'flazz/vim-colorschemes'
+"Bundle 'altercation/vim-colors-solarized'
+"Bundle 'tomasr/molokai'
 
 Bundle 'ShowTrailingWhitespace'
 
@@ -59,16 +60,9 @@ nnoremap : <nop>
 
 " colors
 syntax enable
-"if has("gui_running")
-"    colorscheme solarized
-"    set background=dark
-"    highlight LineNr guibg=#022b35 guifg=#2c464c
-"    highlight CursorLineNr guibg=#073642 guifg=#2c464c
-"    highlight SpecialKey guibg=#022b35
-"else
-	colorscheme molokai
-	let g:rehas256 = 1
-"end
+colorscheme Monokai
+highlight! link SpecialKey Normal
+highlight! link Conceal Operator
 
 " font
 let fontfamily = 'PragmataPro'

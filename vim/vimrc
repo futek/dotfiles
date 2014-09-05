@@ -34,6 +34,9 @@ Bundle 'flazz/vim-colorschemes'
 
 Bundle 'ShowTrailingWhitespace'
 
+Bundle 'vim-pandoc/vim-pandoc'
+Bundle 'vim-pandoc/vim-pandoc-syntax'
+
 " vundle end
 filetype plugin indent on
 
@@ -83,6 +86,9 @@ let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 " jedi
 autocmd FileType python setlocal completeopt-=preview
 let g:jedi#popup_on_dot = 0
+
+" pandoc
+let g:pandoc#folding#fdc = 0
 
 
 " omnisharp

@@ -174,7 +174,7 @@ autocmd Syntax * normal zR
 
 " listchars
 set list
-set listchars=tab:\ \ ,precedes:‹,extends:›,trail:·
+set listchars=tab:\ \ ,precedes:‹,extends:›,trail:·,nbsp:·
 
 " indentation
 set tabstop=4

@@ -38,6 +38,7 @@ call plug#end()
 
 " general
 filetype plugin indent on
+syntax enable
 set encoding=utf-8
 set t_Co=256
 set termencoding=utf-8
@@ -58,11 +59,8 @@ vnoremap <space> :
 " break stupid habit
 nnoremap : <nop>
 
-" colors
-syntax enable
-colorscheme Monokai
-highlight! link SpecialKey Normal
-highlight! link Conceal Operator
+" colorscheme
+colorscheme molokai
 
 " font
 let fontfamily = 'PragmataPro'

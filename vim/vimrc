@@ -90,7 +90,7 @@ let g:jedi#popup_on_dot = 0
 
 " pandoc
 let g:pandoc#folding#fdc = 0
-
+nnoremap <leader>p :Pandoc pdf --template=~/Dropbox/Settings/Pandoc/custom.latex<enter>
 
 " omnisharp
 "autocmd FileType cs setlocal omnifunc=OmniSharp#Complete

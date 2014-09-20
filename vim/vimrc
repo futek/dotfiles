@@ -185,9 +185,9 @@ nnoremap <tab> a<c-t><esc>
 nnoremap <s-tab> a<c-d><esc>
 "inoremap <tab> <c-t>
 "inoremap <s-tab> <c-d>
-xnoremap <tab> :call s:visualmodeindent(1)<enter>
-xnoremap <s-tab> :call s:visualmodeindent(0)<enter>
-function! s:visualmodeindent(right)
+xnoremap <tab> :call <sid>visualmodeindent(1)<enter>
+xnoremap <s-tab> :call <sid>visualmodeindent(0)<enter>
+function! <sid>visualmodeindent(right)
 	let l:lnum = getpos('.')[1]
 	let [l:bufnum1, l:lnum1, l:col1, l:off1] = getpos("'<")
 	let [l:bufnum2, l:lnum2, l:col2, l:off2] = getpos("'>")

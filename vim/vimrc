@@ -32,6 +32,8 @@ Plug 'ShowTrailingWhitespace'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 
+Plug 'futek/vim-anb-syntax'
+
 call plug#end()
 
 " general

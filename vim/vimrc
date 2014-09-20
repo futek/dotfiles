@@ -69,7 +69,7 @@ highlight! link Conceal Operator
 
 " font
 let fontfamily = 'PragmataPro'
-let fontsize = 13
+let fontsize = 12
 let &guifont = fontfamily . ':h' . fontsize
 nnoremap <silent> <leader>0 :<c-u>let &guifont = fontfamily . ':h' . (v:count ? v:count : fontsize)<enter>
 

@@ -1,46 +1,41 @@
 set nocompatible
 
-" vundle begin
-filetype off
-set runtimepath+=~/.vim/bundle/vundle
-call vundle#rc()
-Bundle 'gmarik/vundle v'
+call plug#begin()
 
-" vundle plugins
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-dispatch'
-Bundle 'tpope/vim-speeddating'
-Bundle 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-repeat'
 
-Bundle 'scrooloose/syntastic'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
+Plug 'scrooloose/syntastic'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
 
-Bundle 'ervandew/supertab'
-Bundle 'davidhalter/jedi-vim dev'
+Plug 'ervandew/supertab'
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
 
-"Bundle 'nosami/Omnisharp'
-"Bundle 'Shougo/neocomplete.vim'
-"Bundle 'kien/ctrlp.vim'
+"Plug 'nosami/Omnisharp'
+"Plug 'Shougo/neocomplete.vim'
+"Plug 'kien/ctrlp.vim'
 
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plug 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
-Bundle 'godlygeek/tabular'
+Plug 'godlygeek/tabular'
 
-Bundle 'flazz/vim-colorschemes'
-"Bundle 'altercation/vim-colors-solarized'
-"Bundle 'tomasr/molokai'
+Plug 'flazz/vim-colorschemes'
+"Plug 'altercation/vim-colors-solarized'
+"Plug 'tomasr/molokai'
 
-Bundle 'ShowTrailingWhitespace'
+Plug 'ShowTrailingWhitespace'
 
-Bundle 'vim-pandoc/vim-pandoc'
-Bundle 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 
-" vundle end
-filetype plugin indent on
+call plug#end()
 
 " general
+filetype plugin indent on
 set encoding=utf-8
 set t_Co=256
 set termencoding=utf-8

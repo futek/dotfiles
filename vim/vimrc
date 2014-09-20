@@ -263,3 +263,13 @@ nnoremap <c-l> <c-w>l
 
 " format options
 autocmd BufWinEnter,BufNewFile * setlocal formatoptions=q
+
+" show syntax group
+nnoremap <leader>s :call <sid>syntaxstack()<enter>
+function! <sid>syntaxstack()
+	if !exists("*synstack")
+		return
+	endif
+	echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+

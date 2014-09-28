@@ -85,13 +85,11 @@ let g:NERDCustomDelimiters = {
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
-" jedi
-autocmd FileType python setlocal completeopt-=preview
+" jedi (ftplugin/python.vim)
 let g:jedi#popup_on_dot = 0
 
-" pandoc
+" pandoc (ftplugin/pandoc.vim)
 let g:pandoc#folding#fdc = 0
-nnoremap <leader>p :Pandoc pdf --template=~/Dropbox/Settings/Pandoc/custom.latex<enter>
 
 " omnisharp (ftplugin/cs.vim)
 set completeopt=longest,menuone,preview

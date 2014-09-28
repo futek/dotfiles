@@ -1,0 +1,2 @@
+" jedi
+setlocal completeopt-=preview

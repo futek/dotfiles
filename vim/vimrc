@@ -145,7 +145,7 @@ set listchars=tab:\ \ ,precedes:‹,extends:›,trail:·,nbsp:·
 set tabstop=4
 set shiftwidth=4
 "inoremap <c-tab> <tab>
-"nnoremap <leader><tab> :let @" = "<tab>"<enter>
+nnoremap <leader><tab> :let @" = "<tab>"<enter>
 nnoremap <tab> a<c-t><esc>
 nnoremap <s-tab> a<c-d><esc>
 "inoremap <tab> <c-t>

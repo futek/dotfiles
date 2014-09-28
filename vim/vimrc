@@ -52,6 +52,7 @@ set timeoutlen=500
 set ttimeoutlen=50
 set visualbell
 set wildmenu
+set textwidth=0
 let mapleader = ","
 let maplocalleader = "å"
 nnoremap <space> :

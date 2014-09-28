@@ -78,6 +78,10 @@ set noshowmode
 " nerdtree
 nnoremap <leader>f :NERDTreeToggle<enter>
 
+" nerdcommenter
+let g:NERDCustomDelimiters = {
+	\ 'anb': { 'left': '#' } }
+
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 

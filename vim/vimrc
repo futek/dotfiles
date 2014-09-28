@@ -104,9 +104,7 @@ nnoremap <leader>a :buffer #<enter>
 
 " vimrc edit and reload
 nnoremap <leader>ev :tabedit ~/.vimrc<enter>
-nnoremap <leader>egv :tabedit ~/.gvimrc<enter>
-autocmd! bufwritepost ~/.vimrc nested source %
-autocmd! bufwritepost ~/.gvimrc nested source %
+autocmd! BufWritePost ~/.vimrc nested source %
 
 " mouse
 set mouse=a

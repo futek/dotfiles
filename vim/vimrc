@@ -134,6 +134,7 @@ set relativenumber
 set numberwidth=3
 
 " folding
+set nofoldenable
 set foldmethod=syntax
 autocmd Syntax * normal zR
 

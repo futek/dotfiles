@@ -97,7 +97,7 @@ set splitbelow
 
 " diff settings
 set diffopt=filler,vertical
-"
+
 " buffers
 set hidden
 nnoremap <leader>a :buffer #<enter>
@@ -205,24 +205,11 @@ nnoremap <c-h> <c-w>h
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
+"nnoremap <c-s-h> <c-w><s-h>
+"nnoremap <c-s-j> <c-w><s-j>
+"nnoremap <c-s-k> <c-w><s-k>
+"nnoremap <c-s-l> <c-w><s-l>
 nnoremap <c-q> <c-w><c-q>
-"nnoremap <silent> <c-space> :call s:maximizetoggle()<enter>
-"nnoremap <silent> <nul> :call s:maximizetoggle()<enter>
-"function! s:maximizetoggle()
-"    if exists("s:maximize_session")
-"        exec "source " . s:maximize_session
-"        call delete(s:maximize_session)
-"        unlet s:maximize_session
-"        let &hidden = s:maximize_hidden_save
-"        unlet s:maximize_hidden_save
-"    else
-"        let s:maximize_hidden_save = &hidden
-"        let s:maximize_session = tempname()
-"        set hidden
-"        exec "mksession! " . s:maximize_session
-"        only
-"    endif
-"endfunction
 
 " format options
 autocmd BufWinEnter,BufNewFile * setlocal formatoptions=q
@@ -235,4 +222,3 @@ function! <sid>syntaxstack()
 	endif
 	echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
-

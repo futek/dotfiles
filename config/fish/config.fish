@@ -6,3 +6,6 @@ set PATH /usr/local/bin /usr/local/sbin $PATH
 
 # append powerline config to python path
 set -x PYTHONPATH $PYTHONPATH ~/.config/powerline
+
+# set editor to MacVim
+set -x EDITOR "mvim -f"

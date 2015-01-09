@@ -24,8 +24,6 @@ Plug 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plug 'godlygeek/tabular'
 
 Plug 'flazz/vim-colorschemes'
-"Plug 'altercation/vim-colors-solarized'
-"Plug 'tomasr/molokai'
 
 Plug 'ShowTrailingWhitespace'
 

@@ -9,3 +9,6 @@ set -x PYTHONPATH $PYTHONPATH ~/.config/powerline
 
 # set editor to MacVim
 set -x EDITOR "mvim -f"
+
+# append cabal binaries to path
+set -x PATH $PATH ~/Library/Haskell/bin
